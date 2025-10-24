@@ -75,7 +75,7 @@ fun GraphicEntityModule.createPiece(
     val pieceGroup = createGroup()
         .setX(baseX + x * xxDiff + 0)
         .setY(baseY + x * xyDiff + y * yyDiff)
-        .setAlpha(0.0)
+        .setAlpha(0.2)
     return PieceSpecs(
         group = pieceGroup,
         scoreText = createText().setFillColor(0xFFFFFF).setAnchorX(0.5).setAnchorY(0.5).setX(75).setY(75).setFontSize(60).setAlpha(0.0).setZIndex(20).setStrokeThickness(20.0).setStrokeColor(0x000000).also { pieceGroup.add(it) },

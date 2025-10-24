@@ -4,6 +4,6 @@ import com.codingame.gameengine.core.AbstractSoloPlayer
 
 class Player : AbstractSoloPlayer() {
 
-    override fun getExpectedOutputLines() = 1
+    override fun getExpectedOutputLines() = 2
 
 }
