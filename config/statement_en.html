@@ -7,87 +7,76 @@
             <span>The Goal</span>
         </h1>
         <div class="statement-goal-content">
-            <p>Your task is to implement a scoring calculator for a game called <strong>Entanglement</strong>.  
-            Based on the defined rules, determine how many points the player should receive for the current move after placing their tile on the board, as well as the exact position where the current path ends.</p>
+            <p>
+                Your task is to implement a <strong>scoring calculator</strong> for a game called <strong>Entanglement</strong>.  
+                According to the given rules, your program must determine how many <strong>points</strong> the player earns and which <strong>path</strong> they follow.
+            </p>
         </div>
     </div>
+
+    <!-- RULES -->
     <div class="statement-section statement-rules">
         <h1>
             <span class="icon icon-rules">&nbsp;</span>
             <span>Rules</span>
         </h1>
-        <div>
-            <div class="statement-rules-content">
-                <p>The game is played on a board where the player gradually places hexagonal <strong>tiles</strong>.  
-                Each tile contains 12 entrances numbered
-                    <const>0</const>–
-                    <const>11</const>, forming 6 distinct paths. Each entrance is used exactly once:</p>
+        <div class="statement-rules-content">
+            <p>
+                The game is played on a hexagonal grid.  
+                The player places one hexagonal tile at a time.  
+                Each tile has 12 entrances numbered <const>0</const>–<const>11</const>, forming 6 distinct path segments — each <strong>entrance</strong> connects exactly once. This means, one <strong>path segment</strong> is represented by 2 integers <var>entranceA</var> and <var>entranceB</var>.</p>
+                <p>
+                <em>Note: Path segment entrances are unordered. This means path segment (<const>3-7</const>) is same as (<const>3-7</const>).</em>
+            </p>
 
-                <div style="text-align:center;margin:15px">
-                    <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/7c34165a9a4d696305b071ab5b89bf9e1222cd96e989b098a5aeeeeaeaf0d232.png" style="width:400px;max-width:100%">
-                    <div style="margin:auto;width:400px;max-width:100%">
-                        <em>Example of a single tile with numbered entrances.</em>
-                    </div>
+            <div style="text-align:center;margin:15px">
+                <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/7c34165a9a4d696305b071ab5b89bf9e1222cd96e989b098a5aeeeeaeaf0d232.png" style="width:400px;max-width:100%">
+                <div style="margin:auto;width:400px;max-width:100%">
+                    <em>Example of a single tile with numbered entrances.</em>
                 </div>
-                <p>
-                    <strong>Game rules:</strong>
-                    <ul>
-                        <li>The player always starts the game at coordinate
-                            <const>[0, -1]</const> through entrance
-                            <const>0</const>.</li>
-                        <li>The player always places the next tile on the cell where their current position is located (so the first tile is placed at
-                            <const>[0, -1]</const>).</li>
-                        <li>After placing a tile, the player follows the newly created path.</li>
-                        <li>The player continues along this path until it ends on an empty cell, outside the board, or back at the base located at
-                            <const>[0, 0]</const>.</li>
-                        <li>The game ends when the path leaves the board or returns to the base at
-                            <const>[0, 0]</const>.
-                        </li>
-                    </ul>
-                </p>
+            </div>
 
-                <p>
-                    <strong>Scoring:</strong><br/>  
-                    A single move consists of placing one tile on the board.  
-                    After placing it, the player automatically follows the created path.  
-                    For each segment of the path traversed during this move, the player earns
-                    <const>1</const>, <const>2</const>, <const>3</const>, <const>4</const>, ... points respectively.  
-                    For example, if the path goes through <const>5</const> segments, the player earns <const>15</const> points.
-                </p>
+            <p><strong>Gameplay:</strong></p>
+            <ul>
+                <li>The game starts on the base tile at position <const>[0, 0]</const>, at entrance <const>7</const>.</li>
+                <li>Each turn, the player places a new tile on the empty cell directly ahead (first move: <const>[0, -1]</const>).</li>
+                <li>After placing a tile, the player follows the connected path.</li>
+                <li>The path continues until it reaches an empty cell, the board edge, or returns to the base tile.</li>
+                <li>The game ends once the path reaches the board edge or the base tile.</li>
+            </ul>
 
-                <p>
-                    <strong>Required output:</strong><br/>
-                    For every move requested by the game, output  
-                    <var>earned_points</var>, <var>x</var>, <var>y</var>, <var>entrance</var>,  
-                    where <var>x</var> and <var>y</var> are the coordinates of the destination cell (according to the coordinate system below),  
-                    and <var>entrance</var> is the entry point on that cell from which the player will start the next path.
-                </p>
-                <p>
-                    <div style="text-align:center;margin:15px">
-                        <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/959b8d5a09c32966ea4ddf7758463629fc17419aa9d548c9ce581e63d1a46ea6.png" style="width:400px;max-width:100%">
-                        <div style="margin:auto;width:400px;max-width:100%">
-                            <em>Coordinate system.</em>
-                        </div>
-                    </div>
+            <p><strong>Scoring:</strong></p>
+            <p>
+                Each move consists of placing one tile and following the resulting path.  
+                For every segment of the path crossed during this move, the player scores  
+                <const>1</const>, <const>2</const>, <const>3</const>, ... points respectively.  
+                For example, if a path passes through <const>5</const> segments, the player earns <const>15</const> points in total. Your first task is to compute total <var>score</var> after each tile placement.
+            </p>
 
-                </p>
+            <p><strong>Coordinate System:</strong></p>
+            <p>You’ll also need to print placement of all visited path segments, so make sure you understand the coordinate system used:
+            </p>
+            <div style="text-align:center;margin:15px">
+                <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/959b8d5a09c32966ea4ddf7758463629fc17419aa9d548c9ce581e63d1a46ea6.png" style="width:300px;max-width:100%">
+                <div style="margin:auto;width:500px;max-width:100%">
+                    <em>Coordinate system:<br/>y increases towards the south<br/>x increases towards the north-east</em>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- EXAMPLES -->
     <div class="statement-section statement-examples">
         <h1>
             <span class="icon icon-example">&nbsp;</span>
             <span>Additional Info</span>
         </h1>
         <div class="statement-examples-text">
-            - Click the gear icon in the viewer to access additional display options<br/> 
-            - This puzzle is inspired by the logical game <a href="http://entanglement.gopherwoodstudios.com/">Entanglement</a><br>
+            - Click the gear icon in the viewer to access display options.<br/> 
+            - This puzzle is inspired by the logic game <a href="http://entanglement.gopherwoodstudios.com/">Entanglement</a>.
         </div>
     </div>
 
-    <!-- PROTOCOL -->
+    <!-- INPUT / OUTPUT -->
     <div class="statement-section statement-protocol">
         <h1>
             <span class="icon icon-protocol">&nbsp;</span>
@@ -95,26 +84,26 @@
         </h1>
 
         <div class="blk">
-            <div class="title">Input</div>
+            <div class="title">Turn input</div>
             <div class="text">
-                <p><span class="statement-lineno">Line 1:</span> TODO</p>
+                <p>Each turn, you receive information about the tile placed on the board:</p>
+                <p><span class="statement-lineno"><const>6</const> lines:</span> <const>2</const> space-separated integers <var>entranceA</var> and <var>entranceB</var> that form path segment of the tile.</p>
             </div>
         </div>
 
-        <!-- Protocol block -->
         <div class="blk">
             <div class="title">Output</div>
             <div class="text">
-                <p><span class="statement-lineno">Single line:</span> TODO
-                </p>
+                <p><span class="statement-lineno">Line 1:</span> The current total <var>score</var>.</p>
+                <p><span class="statement-lineno">Line 2:</span> Space-separated quadruples <var>x</var> <var>y</var> <var>entranceA</var> <var>entranceB</var> representing all visited path segments in correct order.</p>
             </div>
         </div>
 
-        <!-- Protocol block -->
         <div class="blk">
             <div class="title">Constraints</div>
             <div class="text">
-                TODO
+                Response time for the first turn: ≤ <const>1s</const><br/>
+                Response time for subsequent turns: ≤ <const>50ms</const>
             </div>
         </div>
     </div>

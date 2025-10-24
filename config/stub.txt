@@ -1,2 +1,4 @@
 gameloop
-write output
+loop 6 read entranceA:int entranceB:int
+write 1
+0 -1 0 1

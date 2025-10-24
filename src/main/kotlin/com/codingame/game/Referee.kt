@@ -67,10 +67,10 @@ class Referee : AbstractReferee() {
     }
 
     override fun init() {
-        gameManager.firstTurnMaxTime = 5000
+        gameManager.firstTurnMaxTime = 1000
         gameManager.turnMaxTime = 50
         gameManager.frameDuration = 1000
-        gameManager.maxTurns = 200
+        gameManager.maxTurns = playableCells.size
         initBoard()
     }
 
@@ -78,12 +78,13 @@ class Referee : AbstractReferee() {
     private var currentScore = 0
 
     override fun gameTurn(turn: Int) {
-        if (turn == 1) {
-            gameManager.testCaseInput.take(playableCells.size).forEach {
-                gameManager.player.sendInputLine(it)
-            }
+        val targetPosition = currentPosition.target
+        val targetTile = pieces[Vector(targetPosition.x, targetPosition.y)]!!
+
+        for (connection in targetTile.connections) {
+            gameManager.player.sendInputLine("${connection.a} ${connection.b}")
         }
-        gameManager.player.sendInputLine("${currentPosition.x} ${currentPosition.y} ${currentPosition.exit}")
+
         try {
             gameManager.player.execute()
 
@@ -91,9 +92,9 @@ class Referee : AbstractReferee() {
             val line1 = gameManager.player.outputs[0].split(" ")
             val line2 = gameManager.player.outputs[1].split(" ")
 
-            if (line1.size != 2 || line1.any { it.toIntOrNull() == null }) { gameManager.loseGame("First line requires 2 space separated integers - score_increment and path_length"); return }
-            val (outputScore, outputPathLength) = line1.map { it.toInt() }
-            if (line2.size != outputPathLength * 4 || line2.any { it.toIntOrNull() == null }) { gameManager.loseGame("Second line requires path_length quadruplets of space separated integers - x y entrance exit"); return }
+            if (line1.size != 1 || line1[0].toIntOrNull() == null) { gameManager.loseGame("First line requires single integer - total score"); return }
+            val outputScore = line1[0].toInt()
+            if (line2.isEmpty() || line2.size % 4 != 0 || line2.any { it.toIntOrNull() == null }) { gameManager.loseGame("Second line requires quadruplets of space separated integers - x y entrance exit"); return }
             val outputPath = line2.map { it.toInt() }.chunked(4)
 
             val oobCells = outputPath.filter { (x, y) -> x to y !in playableCells }
