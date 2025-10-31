@@ -98,11 +98,11 @@ class Referee : AbstractReferee() {
             val outputPath = line2.map { it.toInt() }.chunked(4)
 
             val oobCells = outputPath.filter { (x, y) -> x to y !in playableCells }
-            if (oobCells.isNotEmpty()) { gameManager.loseGame("Placing tile${if (oobCells.size == 1) "" else "s"} out of bounds:\n${oobCells.joinToString("\n"){ (x, y, a, b) -> "[$x, $y] $a<->$b"}}"); return }
+            if (oobCells.isNotEmpty()) { gameManager.loseGame("Placing tile${if (oobCells.size == 1) "" else "s"} out of bounds:\n${oobCells.joinToString("\n"){ (x, y, a, b) -> "[$x, $y] $a=$b"}}"); return }
             val incorrectPathSegments1 = outputPath.filter { (_, _, a, b) -> a !in 0..11 || b !in 0..11 }
-            if (incorrectPathSegments1.isNotEmpty()) { gameManager.loseGame("Incorrect path segment${if (incorrectPathSegments1.size == 1) "" else "s"} - should be between 0 and 11 including:\n${incorrectPathSegments1.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a<->$b" }}"); return }
+            if (incorrectPathSegments1.isNotEmpty()) { gameManager.loseGame("Incorrect path segment${if (incorrectPathSegments1.size == 1) "" else "s"} - entrances should be between 0 and 11:\n${incorrectPathSegments1.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}"); return }
             val incorrectPathSegments2 = outputPath.filter { (_, _, a, b) -> a == b }
-            if (incorrectPathSegments2.isNotEmpty()) { gameManager.loseGame("Incorrect path segment${if (incorrectPathSegments2.size == 1) "" else "s"} - entrance and exit specified at the same position:\n${incorrectPathSegments1.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a<->$b" }}"); return }
+            if (incorrectPathSegments2.isNotEmpty()) { gameManager.loseGame("Incorrect path segment${if (incorrectPathSegments2.size == 1) "" else "s"} - entrance and exit specified at the same position:\n${incorrectPathSegments2.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}"); return }
 
             val (expectedRoute, expectedScore) = expectedOutput()
 
@@ -110,7 +110,9 @@ class Referee : AbstractReferee() {
 
             if (expectedRoute != outputPathNormalized) {
                 showErrorRoute(outputPathNormalized, expectedRoute)
-                gameManager.loseGame("Your path doesn't match required one")
+                gameManager.loseGame("Your path doesn't match:\n" +
+                        "Expected:\n${expectedRoute.segments.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}\n" +
+                        "Actual (normalized entrances):\n${outputPathNormalized.segments.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}")
                 return
             }
 

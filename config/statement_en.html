@@ -24,13 +24,13 @@
             <p>
                 The game is played on a hexagonal grid.  
                 The player places one hexagonal tile at a time.  
-                Each tile has 12 entrances numbered <const>0</const>–<const>11</const>, forming 6 distinct path segments — each <strong>entrance</strong> connects exactly once. This means, one <strong>path segment</strong> is represented by 2 integers <var>entranceA</var> and <var>entranceB</var>.</p>
+                Each tile has 12 entrances numbered <const>0</const>–<const>11</const>, forming 6 distinct path segments — each <strong>entrance</strong> connects exactly once. It follows that one <strong>path segment</strong> is represented by 2 integers <var>entranceA</var> and <var>entranceB</var>.</p>
                 <p>
-                <em>Note: Path segment entrances are unordered. This means path segment (<const>3-7</const>) is same as (<const>3-7</const>).</em>
+                <em>Note: Path segment entrances are unordered. This means path segment (<const>3-7</const>) is the same as (<const>7-3</const>).</em>
             </p>
 
             <div style="text-align:center;margin:15px">
-                <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/7c34165a9a4d696305b071ab5b89bf9e1222cd96e989b098a5aeeeeaeaf0d232.png" style="width:400px;max-width:100%">
+                <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/7c34165a9a4d696305b071ab5b89bf9e1222cd96e989b098a5aeeeeaeaf0d232.png" style="width:300px;max-width:100%">
                 <div style="margin:auto;width:400px;max-width:100%">
                     <em>Example of a single tile with numbered entrances.</em>
                 </div>
@@ -48,16 +48,16 @@
             <p><strong>Scoring:</strong></p>
             <p>
                 Each move consists of placing one tile and following the resulting path.  
-                For every segment of the path crossed during this move, the player scores  
+                For every segment of the path passed through during this move, the player scores  
                 <const>1</const>, <const>2</const>, <const>3</const>, ... points respectively.  
                 For example, if a path passes through <const>5</const> segments, the player earns <const>15</const> points in total. Your first task is to compute total <var>score</var> after each tile placement.
             </p>
 
             <p><strong>Coordinate System:</strong></p>
-            <p>You’ll also need to print placement of all visited path segments, so make sure you understand the coordinate system used:
+            <p>The board has a fixed size, with all cells located at most <const>3</const> units away from the center. Your task is to print placement of all visited path segments, so make sure you understand the coordinate system used:
             </p>
             <div style="text-align:center;margin:15px">
-                <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/959b8d5a09c32966ea4ddf7758463629fc17419aa9d548c9ce581e63d1a46ea6.png" style="width:300px;max-width:100%">
+                <img src="https://cdn-games.codingame.com/community/3996809-1760901746214/fef99b892cfb4da41337c53b5b65daff8660405a550bee91828696ddd04a63af.jpg" style="width:400px;max-width:100%">
                 <div style="margin:auto;width:500px;max-width:100%">
                     <em>Coordinate system:<br/>y increases towards the south<br/>x increases towards the north-east</em>
                 </div>
@@ -87,7 +87,7 @@
             <div class="title">Turn input</div>
             <div class="text">
                 <p>Each turn, you receive information about the tile placed on the board:</p>
-                <p><span class="statement-lineno"><const>6</const> lines:</span> <const>2</const> space-separated integers <var>entranceA</var> and <var>entranceB</var> that form path segment of the tile.</p>
+                <p><span class="statement-lineno"><const>6</const> lines:</span> <const>2</const> space-separated integers <var>entranceA</var> and <var>entranceB</var> that form a path segment of the tile.</p>
             </div>
         </div>
 

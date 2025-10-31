@@ -1,6 +1,6 @@
 title:
-  1: Fail
-  2: Fail
+  1: Fail-In-One
+  2: Fail-In-One
 testIn: |-
   -3 -3 0 8 1 2 3 11 4 10 5 9 6 7
   -2 -3 0 5 1 11 2 6 3 10 4 7 8 9

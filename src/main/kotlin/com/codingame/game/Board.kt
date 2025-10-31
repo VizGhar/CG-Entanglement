@@ -87,8 +87,8 @@ fun GraphicEntityModule.createHelperPiece(x: Int, y: Int, toggleModule: ToggleMo
     val pieceGroup = createGroup()
         .setX(baseX + x * xxDiff + 0)
         .setY(baseY + x * xyDiff + y * yyDiff)
-        .setZIndex(1)
-    pieceGroup.add(createSprite().setImage("shadow.png"))
-    pieceGroup.add(createText().setText("[$x, $y]").setFontSize(30).setAnchor(0.5).setX(75).setY(75).setFillColor(0xFFFFFF))
+        .setZIndex(4)
+    pieceGroup.add(createSprite().setImage("shadow.png").setZIndex(100))
+    pieceGroup.add(createText().setText("[$x, $y]").setFontSize(30).setAnchor(0.5).setX(75).setY(75).setFillColor(0xFFFFFF).setZIndex(101))
     toggleModule.displayOnToggleState(pieceGroup, "coordinates", true)
 }

@@ -4,7 +4,7 @@ public class SkeletonMain {
     public static void main(String[] args) {
         SoloGameRunner gameRunner = new SoloGameRunner();
         gameRunner.setAgent(TestPlayer.class);
-        gameRunner.setTestCase("test7.yaml");
+        gameRunner.setTestCase("test15.yaml");
         gameRunner.start();
     }
 }
