@@ -112,7 +112,7 @@ class Referee : AbstractReferee() {
                 showErrorRoute(outputPathNormalized, expectedRoute)
                 gameManager.loseGame("Your path doesn't match:\n" +
                         "Expected:\n${expectedRoute.segments.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}\n" +
-                        "Actual (normalized entrances):\n${outputPathNormalized.segments.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}")
+                        "Actual:\n${outputPathNormalized.segments.joinToString("\n") { (x, y, a, b) -> "[$x, $y] $a=$b" }}")
                 return
             }
 
