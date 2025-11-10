@@ -47,10 +47,17 @@
 
             <p><strong>Scoring:</strong></p>
             <p>
-                Each move consists of placing one tile and following the resulting path.  
-                For every segment of the path passed through during this move, the player scores  
-                <const>1</const>, <const>2</const>, <const>3</const>, ... points respectively.  
-                For example, if a path passes through <const>5</const> segments, the player earns <const>15</const> points in total. Your first task is to compute total <var>score</var> after each tile placement.
+                Each turn consists of placing one tile and following the resulting path. For <strong>every segment</strong> of the path passed through <strong>during this turn</strong>, the player scores
+                <const>1</const>, <const>2</const>, <const>3</const>, ... points respectively.</p>
+                <p><em>Examples:</em><br/>
+                <ul>
+<li>If the path passes through <const>1</const> segment this turn, the score increases by <const>1</const></li>
+<li>If the path passes through <const>2</const> segments this turn, the score increases by <const>3</const> (<const>1</const>+<const>2</const>)</li>
+<li>If the path passes through <const>3</const> segments this turn, the score increases by <const>6</const> (<const>1</const>+<const>2</const>+<const>3</const>)</li>
+<li>If the path passes through <const>4</const> segments this turn, the score increases by <const>10</const> (<const>1</const>+<const>2</const>+<const>3</const>+<const>4</const>)</li>
+<li>If the path passes through <const>5</const> segments this turn, the score increases by <const>15</const> (<const>1</const>+<const>2</const>+<const>3</const>+<const>4</const>+<const>5</const>)</li>
+<li>and so on...</li>
+                </ul>
             </p>
 
             <p><strong>Coordinate System:</strong></p>
