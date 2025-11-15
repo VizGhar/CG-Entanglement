@@ -90,12 +90,12 @@ class Referee : AbstractReferee() {
 
             if (gameManager.player.outputs.size != 2) { gameManager.loseGame("2 lines expected"); return }
             val line1 = gameManager.player.outputs[0].split(" ")
-            val line2 = gameManager.player.outputs[1].split(" ")
+            val line2 = gameManager.player.outputs[1].split(";").map { it.trim().split(" ") }
 
             if (line1.size != 1 || line1[0].toIntOrNull() == null) { gameManager.loseGame("First line requires single integer - total score"); return }
             val outputScore = line1[0].toInt()
-            if (line2.isEmpty() || line2.size % 4 != 0 || line2.any { it.toIntOrNull() == null }) { gameManager.loseGame("Second line requires quadruplets of space separated integers - x y entrance exit"); return }
-            val outputPath = line2.map { it.toInt() }.chunked(4)
+            if (line2.isEmpty() || line2.any { it.size != 4} || line2.any { it.any { it.toIntOrNull() == null } }) { gameManager.loseGame("Second line requires semicolon separated quadruplets of space separated integers - x y entrance exit"); return }
+            val outputPath = line2.map { it.map{ it.toInt() } }
 
             val oobCells = outputPath.filter { (x, y) -> x to y !in playableCells }
             if (oobCells.isNotEmpty()) { gameManager.loseGame("Placing tile${if (oobCells.size == 1) "" else "s"} out of bounds:\n${oobCells.joinToString("\n"){ (x, y, a, b) -> "[$x, $y] $a=$b"}}"); return }
