@@ -1,6 +1,6 @@
 title:
-  1: Longer path no-reuse
-  2: Longer path no-reuse
+  1: Longer path no-cycles
+  2: Longer path no-cycles
 testIn: |-
   -3 -3 0 9 1 8 2 7 3 6 4 5 10 11
   -2 -3 0 9 1 2 3 4 5 7 6 8 10 11
